@@ -173,10 +173,11 @@
     yesBtn.addEventListener("click", celebrate);
 
     function celebrate() {
-      document.getElementById("response").style.display = "block";
-      noBtn.style.display = "none";
-      yesBtn.style.display = "none";
-      startHearts();
+  document.getElementById("response").style.display = "block";
+  document.getElementById("bootyLine").style.display = "none"; // <-- ADD THIS
+  noBtn.style.display = "none";
+  yesBtn.style.display = "none";
+  startHearts();
     }
 
     function startHearts() {
