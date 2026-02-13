@@ -1,1 +1,194 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>For My Beautiful Wife </title><style> body { margin: 0; padding: 0; background: linear-gradient(135deg, #ff9ecf, #ffc3e6); font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; overflow: hidden; } .card { background: white; padding: 40px 30px; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.15); max-width: 90%; position: relative; } h1 { color: #d63384; font-size: 1.5rem; line-height: 1.5; } .subtle { margin-top: 15px; font-size: 0.95rem; color: #888; opacity: 0; transition: opacity 1.5s ease; font-style: italic; } .buttons { margin-top: 30px; position: relative; height: 140px; } button { padding: 15px 25px; font-size: 1rem; border: none; border-radius: 50px; cursor: pointer; transition: all 0.3s ease; position: absolute; } #yesBtn { background: #ff4d88; color: white; left: 50%; transform: translateX(-50%); } #yesBtn:hover { background: #d63384; } #noBtn { background: #999; color: white; top: 70px; left: 50%; transform: translateX(-50%); } .message { margin-top: 25px; font-size: 1.2rem; color: #444; display: none; } .heart { position: absolute; font-size: 20px; animation: floatUp 4s linear infinite; } @keyframes floatUp { from { transform: translateY(100vh); opacity: 1; } to { transform: translateY(-10vh); opacity: 0; } }</style></head><body><div class="card"> <h1> Dearest lovely wife of mine,<br> will you join me in our first married Valentine? </h1> <div id="bootyLine" class="subtle"> It will be my honored duty, to please that booty. </div> <div class="buttons"> <button id="yesBtn" onclick="celebrate()">Yes, my love </button> <button id="noBtn">No </button> </div> <div id="response" class="message"> I am the luckiest husband alive.<br> I love you more than words could ever hold.<br><br> Happy our first married Valentine </div></div><script>const noBtn = document.getElementById("noBtn");const yesBtn = document.getElementById("yesBtn");const buttonsContainer = document.querySelector(".buttons");let yesScale = 1;// Make booty line appear after 3 secondssetTimeout(() => { document.getElementById("bootyLine").style.opacity = 1;}, 3000);// Move "No" button randomlyfunction moveButton() { const containerRect = buttonsContainer.getBoundingClientRect(); const btnWidth = noBtn.offsetWidth; const btnHeight = noBtn.offsetHeight; const maxX = containerRect.width - btnWidth; const maxY = containerRect.height - btnHeight; const randomX = Math.random() * maxX; const randomY = Math.random() * maxY; noBtn.style.left = randomX + "px"; noBtn.style.top = randomY + "px"; noBtn.style.transform = "none"; // Grow Yes button slightly yesScale += 0.08; yesBtn.style.transform = `translateX(-50%) scale(${yesScale})`;}// Desktop hovernoBtn.addEventListener("mouseover", moveButton);// Mobile touchnoBtn.addEventListener("touchstart", function(e) { e.preventDefault(); moveButton();});function celebrate() { document.getElementById("response").style.display = "block"; noBtn.style.display = "none"; yesBtn.style.display = "none"; startHearts();}function startHearts() { setInterval(() => { const heart = document.createElement("div"); heart.className = "heart"; heart.innerHTML = " "; heart.style.left = Math.random() * 100 + "vw"; document.body.appendChild(heart); setTimeout(() => heart.remove(), 4000); }, 300);}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For My Beautiful Wife</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ff9ecf, #ffc3e6);
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+      max-width: 90%;
+      position: relative;
+      z-index: 2; /* ensure card stays above floating hearts */
+    }
+
+    h1 {
+      color: #d63384;
+      font-size: 1.5rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .subtle {
+      margin-top: 15px;
+      font-size: 0.95rem;
+      color: #888;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      font-style: italic;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      position: relative;
+      height: 140px;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: absolute;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #yesBtn {
+      background: #ff4d88;
+      color: white;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #yesBtn:hover {
+      background: #d63384;
+    }
+
+    #noBtn {
+      background: #999;
+      color: white;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .message {
+      margin-top: 25px;
+      font-size: 1.2rem;
+      color: #444;
+      display: none;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: floatUp 4s linear infinite;
+      z-index: 1; /* behind the card */
+      pointer-events: none; /* IMPORTANT: hearts won't block clicks */
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(100vh); opacity: 1; }
+      to   { transform: translateY(-10vh); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>
+      Dearest lovely wife of mine,<br />
+      will you join me in our first married Valentine?
+    </h1>
+
+    <div id="bootyLine" class="subtle">
+      It will be my honored duty, to please that booty.
+    </div>
+
+    <div class="buttons">
+      <button id="yesBtn" type="button">Yes, my love</button>
+      <button id="noBtn" type="button">No</button>
+    </div>
+
+    <div id="response" class="message">
+      I am the luckiest husband alive.<br />
+      I love you more than words could ever hold.<br /><br />
+      Happy our first married Valentine
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const buttonsContainer = document.querySelector(".buttons");
+
+    let yesScale = 1;
+
+    // Make booty line appear after 3 seconds
+    setTimeout(() => {
+      document.getElementById("bootyLine").style.opacity = 1;
+    }, 3000);
+
+    // Move "No" button randomly (and grow Yes slightly)
+    function moveButton() {
+      const containerRect = buttonsContainer.getBoundingClientRect();
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+
+      const maxX = containerRect.width - btnWidth;
+      const maxY = containerRect.height - btnHeight;
+
+      const randomX = Math.random() * Math.max(0, maxX);
+      const randomY = Math.random() * Math.max(0, maxY);
+
+      noBtn.style.left = randomX + "px";
+      noBtn.style.top = randomY + "px";
+      noBtn.style.transform = "none";
+
+      yesScale += 0.08;
+      yesBtn.style.transform = `translateX(-50%) scale(${yesScale})`;
+      yesBtn.style.transition = "transform 0.2s ease";
+    }
+
+    // Desktop hover
+    noBtn.addEventListener("mouseover", moveButton);
+
+    // Mobile touch
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveButton();
+    }, { passive: false });
+
+    // Click Yes
+    yesBtn.addEventListener("click", celebrate);
+
+    function celebrate() {
+      document.getElementById("response").style.display = "block";
+      noBtn.style.display = "none";
+      yesBtn.style.display = "none";
+      startHearts();
+    }
+
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.textContent = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 4000);
+      }, 300);
+    }
+  </script>
+</body>
+</html>
